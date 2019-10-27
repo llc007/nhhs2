@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Encuesta;
 use Illuminate\Http\Request;
 
-class EncuestaController extends Controller
+class EvaluacionController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +15,9 @@ class EncuestaController extends Controller
     public function index()
     {
         //
-        dd("Hola");
+
+
+        return view('evaluacion/listaEvaluacion');
     }
 
     /**

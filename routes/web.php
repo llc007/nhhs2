@@ -39,10 +39,11 @@ Route::middleware(['auth'])->group(function () {
     Route::get('roles/{role}/edit', 'RoleController@edit')->name('roles.edit')
         ->middleware('permission:roles.edit');
 
+    //RUTAS DE EVALUACION
 
     // PARA COMPROBAR POR ROL
     //PARA COMPROBAR CON PERMISOS SE UTILIZA @CAN en el FRONT.
-    Route::get('encuestas', 'EncuestaController@index')->name('encuestas.index')
-        ->middleware('has.role:directivo');
+    Route::get('evaluaciones', 'EvaluacionController@index')->name('evaluacion.index');
+//        ->middleware('has.role:directivo');
 });
 

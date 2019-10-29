@@ -3,22 +3,20 @@
 @section('scriptCabecera')
     <script>
         $(document).ready(function () {
-            $('#listaEvTable')
-                .dataTable();
+            $('#evaluacionesTable').dataTable();
+            $('#preguntasTable').dataTable();
         });
     </script>
 @endsection
 
 @section('content')
-
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-11">
                 <div class="card">
-                    <div class="card-header">Evaluaciones cerradas</div>
-
+                    <div class="card-header">Administrar evaluaciones</div>
                     <div class="card-body">
-                        <table id="listaEvTable" class="table table-striped table-bordered" style="width:100%">
+                        <table id="evaluacionesTable" class="table table-striped table-bordered" style="width:100%">
                             <thead>
                             <tr>
                                 <th>Name</th>
@@ -82,9 +80,7 @@
                             </tr>
                             </tfoot>
                         </table>
-
                     </div>
-
                 </div>
             </div>
         </div>
@@ -94,16 +90,39 @@
         <div class="row justify-content-center">
             <div class="col-md-11">
                 <div class="card">
-                    <div class="card-header">Evaluaciones pendientes</div>
-
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <h6 class="mb-0">Administrar preguntas</h6>
+                        <div>
+                            <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target=".bd-example-modal-xl">Nueva pregunta</button>
+                        </div>
+                    </div>
                     <div class="card-body">
-                        @if (session('status'))
-                            <div class="alert alert-success" role="alert">
-                                {{ session('status') }}
-                            </div>
-                        @endif
+                        <table id="preguntasTable" class="table table-striped table-bordered" style="width:100%">
+                            <thead>
+                            <tr>
+                                <th>Pregunta</th>
+                                <th>Tipo</th>
+                                <th>Fecha creación</th>
 
-                        You are logged in!
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>Tiger Nixon</td>
+                                <td>System Architect</td>
+                                <td>01/Nov/2019</td>
+
+                            </tr>
+
+                            </tbody>
+                            <tfoot>
+                            <tr>
+                                <th>Name</th>
+                                <th>Position</th>
+                                <th>Fecha de creación</th>
+                            </tr>
+                            </tfoot>
+                        </table>
                     </div>
                 </div>
             </div>
@@ -111,5 +130,38 @@
     </div>
 
 
+    <div class="modal fade bd-example-modal-xl" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalCenterTitle">Nueva pregunta</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <input class="form-control form-control-lg" type="text" placeholder="Ingrese pregunta">
+                    <hr>
+                    <div>
+
+                        <label for="exampleFormControlSelect1">Puntos</label>
+                        <select class="form-control" id="exampleFormControlSelect1">
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                        </select>
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
+
 

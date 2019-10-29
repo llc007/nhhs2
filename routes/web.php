@@ -43,7 +43,10 @@ Route::middleware(['auth'])->group(function () {
 
     // PARA COMPROBAR POR ROL
     //PARA COMPROBAR CON PERMISOS SE UTILIZA @CAN en el FRONT.
-    Route::get('evaluaciones', 'EvaluacionController@index')->name('evaluacion.index');
-//        ->middleware('has.role:directivo');
+    Route::get('evaluaciones', 'EvaluacionController@index')->name('evaluacion.index')
+        ->middleware('has.role:directivo');
+
+    Route::get('administrarevaluaciones', 'EvaluacionController@admin')->name('evaluacion.admin')
+        ->middleware('has.role:directivo');
 });
 

@@ -19,7 +19,13 @@ class EvaluacionController extends Controller
 
         return view('evaluacion/listaEvaluacion');
     }
+    public function admin()
+    {
+        //
 
+
+        return view('evaluacion/administrarEvaluacion');
+    }
     /**
      * Show the form for creating a new resource.
      *

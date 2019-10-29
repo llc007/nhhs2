@@ -15,12 +15,9 @@
             src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
     <script type="text/javascript" language="javascript"
             src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
-    <script>
-        $(document).ready(function () {
-            $('#example')
-                .dataTable();
-        });
-    </script>
+
+    @yield('scriptCabecera')
+
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -55,8 +52,8 @@
                         </a>
 
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="{{ route('evaluacion.index') }}">
-                                {{ __('Crear evaluación') }}
+                            <a class="dropdown-item" href="{{ route('evaluacion.admin') }}">
+                                {{ __('Administrar evaluaciónes') }}
                             </a>
 
                             <a class="dropdown-item" href="{{ route('evaluacion.index') }}">

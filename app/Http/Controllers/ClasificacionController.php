@@ -3,12 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Clasificacion;
-use App\Encuesta;
-use App\Pregunta;
 use Illuminate\Http\Request;
 
-class EvaluacionController extends Controller
+class ClasificacionController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('has.role:directivo');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -16,19 +20,10 @@ class EvaluacionController extends Controller
      */
     public function index()
     {
-        //
-
-
-        return view('evaluacion/listaEvaluacion');
+        //'hola
+        dd('hola');
     }
-    public function admin()
-    {
-        //
-        $clasificaciones = Clasificacion::all();
-        $preguntas = Pregunta::all();
 
-        return view('evaluacion/administrarEvaluacion', compact('clasificaciones', 'preguntas'));
-    }
     /**
      * Show the form for creating a new resource.
      *
@@ -42,21 +37,30 @@ class EvaluacionController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param \Illuminate\Http\Request $request
+     * @return string
      */
     public function store(Request $request)
     {
+
         //
+        $data = \request()->all();
+        $cl = new Clasificacion();
+        $cl->nombre = $data['nombre'];
+        $cl->save();
+
+
+        return $cl;
+
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Encuesta  $encuesta
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Encuesta $encuesta)
+    public function show($id)
     {
         //
     }
@@ -64,10 +68,10 @@ class EvaluacionController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Encuesta  $encuesta
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Encuesta $encuesta)
+    public function edit($id)
     {
         //
     }
@@ -75,11 +79,11 @@ class EvaluacionController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Encuesta  $encuesta
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Encuesta $encuesta)
+    public function update(Request $request, $id)
     {
         //
     }
@@ -87,11 +91,13 @@ class EvaluacionController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Encuesta  $encuesta
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Encuesta $encuesta)
+    public function destroy($id)
     {
         //
+        Clasificacion::destroy($id);
+        return $id;
     }
 }

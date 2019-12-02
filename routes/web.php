@@ -27,7 +27,7 @@ Route::get('/septimo', function () {
 
 Route::get('/upload/{file}', function ($file) {
     return Storage::download("public/upload/$file");
-});
+})->name('descargar');
 
 //GRUPO DE RUTAS UNIDAS A U N MIDDLEWARE.
 Route::middleware(['auth'])->group(function () {

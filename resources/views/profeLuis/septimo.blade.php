@@ -19,7 +19,7 @@
                         <div class="card-body">
                             <div class="d-flex flex-column">
                                 <h4>Documentos</h4>
-                                <a href="/upload/TallerExcel.xlsx">Descargar</a>
+                                <a href="{{route('descargar','TallerExcel.xlsx')}}">Descargar</a>
                             </div>
                             <hr>
                         </div>

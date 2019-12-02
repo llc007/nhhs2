@@ -7,7 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 class Alternativa extends Model
 {
     //
+    protected $table = 'alternativa';
     protected $fillable = [
-        'pregunta', 'respuesta', 'puntaje',
+        'alternativa'
     ];
 }

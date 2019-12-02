@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Clasificacion;
+use App\Encuesta;
 use Illuminate\Http\Request;
 
 class ClasificacionController extends Controller
@@ -63,6 +64,7 @@ class ClasificacionController extends Controller
     public function show($id)
     {
         //
+
     }
 
     /**

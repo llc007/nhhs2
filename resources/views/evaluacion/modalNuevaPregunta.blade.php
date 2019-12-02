@@ -15,7 +15,7 @@
             <form novalidate class="needs-validation">
                 @csrf
                 <div class="modal-body">
-                    <input name="pregunta" class="form-control form-control-lg" type="text"
+                    <input name="pregunta" id="inputPregunta" class="form-control form-control-lg" type="text"
                            placeholder="Ingrese pregunta" required>
                     <div class="invalid-feedback">
                         Debe ser un nombre valido.
@@ -81,7 +81,7 @@
                 <div class="modal-footer d-flex justify-content-between">
                     <div class="d-flex align-items-center">
                         <label for="clasificacionInput" class="mb-0"><b>Clasificacion:</b></label>
-                        <select id="clasificacionInput" class="form-control ml-2" id="selectClasificacion" required>
+                        <select id="clasificacionInput" class="form-control ml-2"  required>
                             @foreach($clasificaciones as $cl)
                                 <option value={{$cl->id}}>{{$cl->nombre}}</option>
                             @endforeach

@@ -6,6 +6,7 @@ use App\Clasificacion;
 use App\Encuesta;
 use App\Pregunta;
 use Illuminate\Http\Request;
+use phpDocumentor\Reflection\Types\Integer;
 
 class EvaluacionController extends Controller
 {
@@ -24,10 +25,11 @@ class EvaluacionController extends Controller
     public function admin()
     {
         //
+        $encuestas = Encuesta::all();
         $clasificaciones = Clasificacion::all();
         $preguntas = Pregunta::all();
 
-        return view('evaluacion/administrarEvaluacion', compact('clasificaciones', 'preguntas'));
+        return view('evaluacion/administrar', compact('encuestas','clasificaciones', 'preguntas'));
     }
     /**
      * Show the form for creating a new resource.
@@ -48,6 +50,14 @@ class EvaluacionController extends Controller
     public function store(Request $request)
     {
         //
+        $data = \request()->all();
+        $en = new Encuesta();
+        $en->nombre = $data['nombre'];
+        $en->descripcion = $data['descripcion'];
+        $en->save();
+
+
+        return $data;
     }
 
     /**
@@ -56,9 +66,13 @@ class EvaluacionController extends Controller
      * @param  \App\Encuesta  $encuesta
      * @return \Illuminate\Http\Response
      */
-    public function show(Encuesta $encuesta)
+    public function show(int $id)
     {
         //
+
+        $evaluacion = Encuesta::find($id);
+        $preguntasRestantes = Pregunta::all();
+        return view('evaluacion/administrarEvaluacion', compact('evaluacion','preguntasRestantes'));
     }
 
     /**

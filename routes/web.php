@@ -48,10 +48,20 @@ Route::middleware(['auth'])->group(function () {
     Route::get('administrarevaluaciones', 'EvaluacionController@admin')->name('evaluacion.admin')
         ->middleware('has.role:directivo');
 
+    Route::resources([
+        'encuesta' => 'EvaluacionController',
+    ]);
+
     Route::resource('preguntas', 'PreguntaController')->middleware('has.role:directivo');
 
     Route::resources([
         'clasificacion' => 'ClasificacionController',
     ]);
+
+
+});
+
+Route::get('septimo', function () {
+    return view('profeLuis/septimo');
 });
 

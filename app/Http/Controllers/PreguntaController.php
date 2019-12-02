@@ -2,12 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use App\Alternativa;
+use App\AlternativaPregunta;
 use App\Pregunta;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
 class PreguntaController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('has.role:directivo');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -25,13 +33,8 @@ class PreguntaController extends Controller
      */
     protected function create(array $data)
     {
-        dd("aca");
-        return Pregunta::create([
-            'name' => $data['name'],
-            'surname' => $data['surname'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-        ]);
+
+
     }
 
 
@@ -46,26 +49,35 @@ class PreguntaController extends Controller
     {
         //
 
-        dd($this->validate($request, [
-            'pregunta' => ['required', 'string', 'max:255'],
-        ]));
-        dd($this);
-        $pregunta = $this->create($request->all());
+        $data = \request()->all();
 
-       dd($pregunta);
-//       return $pregunta;
+
+        $pr = new Pregunta();
+        $pr->pregunta = $data['pregunta'];
+        $pr->clasificacion = $data['clasificacion'];
+        $pr->save();
+
+        $puntajes = $data['puntajes'];
+        $i=0;
+        foreach ($data['alternativas'] as $a){
+            $alternativa = Alternativa::firstOrNew(['alternativa' => $a]);
+            $alternativa->save();
+            $alternativaPregunta = new AlternativaPregunta();
+            $alternativaPregunta->pregunta = $pr->id;
+            $alternativaPregunta->alternativa = $alternativa->id;
+            $alternativaPregunta->puntaje = $puntajes[$i];
+            $alternativaPregunta->save();
+            $i++;
+        }
+
+
+
+
+        return $data;
+
 
     }
 
-    protected function validator(array $data)
-    {
-
-        return Validator::make($data, [
-            'pregunta' => ['required', 'string', 'max:255'],
-            'respuesta' => ['required', 'string', 'max:255'],
-            'puntaje' => ['required', 'numeric'],
-        ]);
-    }
 
     /**
      * Display the specified resource.
@@ -107,8 +119,18 @@ class PreguntaController extends Controller
      * @param \App\Pregunta $pregunta
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Pregunta $pregunta)
+    public function destroy($id)
     {
         //
+
+
+
+//        if(Pregunta::destroy($id)){
+//            AlternativaPregunta::where('pregunta',$id)->delete();
+//        }
+        $boorar =  AlternativaPregunta::where('pregunta',$id)->delete();
+        Pregunta::destroy($id);
+
+        return $id;
     }
 }

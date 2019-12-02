@@ -19,11 +19,15 @@ class CreateAlternativaPreguntaTable extends Migration
             $table->unsignedBigInteger('pregunta')->index();
             $table->foreign('pregunta')
                 ->references('id')
-                ->on('preguntas');
+                ->on('preguntas')
+                ->onDelete('cascade');
 
-            $table->string('respuesta');
+            $table->unsignedBigInteger('alternativa')->index();
+            $table->foreign('alternativa')
+                ->references('id')
+                ->on('alternativa');
             $table->integer('puntaje')
-            ->nullable();
+                ->nullable();
             $table->timestamps();
         });
     }

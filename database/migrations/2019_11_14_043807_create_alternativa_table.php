@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePreguntasTable extends Migration
+class CreateAlternativaTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,9 @@ class CreatePreguntasTable extends Migration
      */
     public function up()
     {
-        Schema::create('preguntas', function (Blueprint $table) {
+        Schema::create('alternativa', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('pregunta');
-            $table->unsignedBigInteger('clasificacion')->index();
-            $table->foreign('clasificacion')
-                ->references('id')
-                ->on('clasificaciones');
+            $table->string('alternativa');
             $table->timestamps();
         });
     }
@@ -31,6 +27,6 @@ class CreatePreguntasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('preguntas');
+        Schema::dropIfExists('alternativa');
     }
 }

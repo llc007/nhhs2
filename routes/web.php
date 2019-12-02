@@ -11,6 +11,8 @@
 |
 */
 
+use Illuminate\Support\Facades\Storage;
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -19,6 +21,13 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+Route::get('/septimo', function () {
+    return view('profeLuis/septimo');
+});
+
+Route::get('/upload/{file}', function ($file) {
+    return Storage::download("public/upload/$file");
+});
 
 //GRUPO DE RUTAS UNIDAS A U N MIDDLEWARE.
 Route::middleware(['auth'])->group(function () {
@@ -61,7 +70,4 @@ Route::middleware(['auth'])->group(function () {
 
 });
 
-Route::get('septimo', function () {
-    return view('profeLuis/septimo');
-});
 

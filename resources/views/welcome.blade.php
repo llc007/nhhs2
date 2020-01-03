@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Luis López</title>
+        <title>NHHS</title>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
@@ -81,14 +81,14 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Luis López
+                    NHHS
                 </div>
 
                 <div class="links">
                     @can('directivo')
                     <a href="{{route('encuestas.index')}}">Administrar encuestas</a>
                     @endcan
-                    <a>Eres directivo</a>
+                    <a>Bienvenido {{session('user')}}</a>
                 </div>
             </div>
         </div>

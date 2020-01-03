@@ -14,4 +14,8 @@ class Pregunta extends Model
     public function tieneClasificacion(){
         return $this->hasOne('App\Clasificacion','id','clasificacion');
     }
+
+    public function tieneAlternativaPregunta(){
+        return $this->hasMany('App\AlternativaPregunta','pregunta');
+    }
 }

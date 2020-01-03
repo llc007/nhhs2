@@ -9,9 +9,11 @@ class AlternativaPregunta extends Model
     //
     protected $table = 'alternativa_pregunta';
     protected $fillable = [
-        'pregunta', 'respuesta', 'puntaje',
+        'pregunta', 'alternativa', 'puntaje',
     ];
 
-
+    public function tieneAlternativa(){
+        return $this->hasOne('App\Alternativa','id','alternativa');
+    }
 
 }

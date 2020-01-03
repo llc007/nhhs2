@@ -31,7 +31,8 @@
 
                         @foreach($preguntasRestantes as $pr)
                             <tr>
-                                <td>{{$loop->iteration}}</td>
+{{--                                <td>{{$loop->iteration}}</td>--}}
+                                <td>{{$pr->id}}</td>
                                 <td>{{$pr->pregunta}}</td>
                                 <td>{{$pr->tieneClasificacion->nombre}}</td>
                                 <td>{{\Carbon\Carbon::parse($pr->created_at)->format('d-m-Y')}}</td>

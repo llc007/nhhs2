@@ -40,6 +40,25 @@
                             <h5>{{$evaluacion->descripcion}}</h5>
                         </div>
                         <hr>
+                        <div id="preguntasDeEvaluacion">
+                            @foreach($preguntasDeEncuesta as $p)
+                                <h5>{{$loop->iteration}}.- {{$p->pregunta}}</h5>
+
+                                @foreach($p->tieneAlternativaPregunta as $ap)
+                                    <div class="custom-control custom-radio">
+                                        <input class="custom-control-input" type="radio"
+                                               name="pregunta{{$p->id}}"
+                                               id="alternativa{{$p->id}}-{{$ap->id}}" value="option{{$ap->id}}">
+                                        <label class="custom-control-label" for="alternativa{{$p->id}}-{{$ap->id}}">
+                                            {{$ap->tieneAlternativa->alternativa}}
+                                        </label>
+                                    </div>
+                                @endforeach
+
+
+                                <hr>
+                            @endforeach
+                        </div>
                     </div>
                 </div>
             </div>
@@ -57,15 +76,15 @@
     {{--Se añade la opcion para validar el formulario con clase needs-validation--}}
     @extends('util.validaFormulario')
     {{--    Validar formularios--}}
-    @section('instruccionDespuesDeValidar')
-        //Enviar a la funcion de AJAX que guarda la pregunta y respuesta
-        if ($('#submitApretado').val() == 'addP') {
-        ajaxAddPregunta();
-        } else if ($('#submitApretado').val() == 'clasificacion') {
-        ajaxClasificacion();
-        }
-    @endsection
-    @extends('evaluacion.jsAjaxEncuesta')
+@section('instruccionDespuesDeValidar')
+    //Enviar a la funcion de AJAX que guarda la pregunta y respuesta
+    if ($('#submitApretado').val() == 'addP') {
+    ajaxAddPregunta();
+    } else if ($('#submitApretado').val() == 'clasificacion') {
+    ajaxClasificacion();
+    }
+@endsection
+@extends('evaluacion.jsAjaxEncuesta')
 
 <script>
     $('#btnAddPregunta').click(function () {
@@ -78,13 +97,13 @@
     //Revisa que CB esta presionado y saca la id de la pregunta asociada.
     $('.myCheckBox').click(function () {
         var mystring = $(this).attr('id');
-        mystring = mystring.replace('p','');
+        mystring = mystring.replace('p', '');
         id = parseInt(mystring);
 
-        if(preguntas[id]!=id){
-            preguntas[id]=id;
-        }else{
-            preguntas[id]=null;
+        if (preguntas[id] != id) {
+            preguntas[id] = id;
+        } else {
+            preguntas[id] = null;
         }
 
         var limpio = new Array();
@@ -93,16 +112,15 @@
                 limpio.push(preguntas[i]);
             }
         }
-        if(limpio.length==0){
+        if (limpio.length == 0) {
             $('#preguntasAñadidas').html("");
-        }else{
+        } else {
             $('#preguntasAñadidas').html(limpio.length);
         }
         // console.info(limpio);
         console.info(preguntas);
 
     });
-
 
 
 </script>

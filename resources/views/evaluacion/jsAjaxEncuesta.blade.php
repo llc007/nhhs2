@@ -45,13 +45,12 @@
     {{--    ********************************************--}}
     function ajaxAddPregunta(accionCL, idCL = null) {
 
-
-            var data = {
+        var data = {
                 idEncuesta: $('#inputEvaluacion').val(),
                 preguntasParaAñadir: $("#descripcionEvaluacion").val()
             };
             var accion = "crear";
-            var url = 'encuesta/';
+            var url = 'encuesta/joinpregunta';
             var type = 'POST';
 
 
@@ -66,7 +65,7 @@
             data: data,
         }).done(function (datos) {
             if (accion === 'crear') {
-                $('#modalNuevaEvaluacion').modal('toggle');
+                $('#modalAgregarPregunta').modal('toggle');
                 refreshTable('encuestaTable');
                 return 'exito';
             } else if (accion === 'eliminar') {

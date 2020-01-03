@@ -72,7 +72,14 @@ class EvaluacionController extends Controller
 
         $evaluacion = Encuesta::find($id);
         $preguntasRestantes = Pregunta::all();
-        return view('evaluacion/administrarEvaluacion', compact('evaluacion','preguntasRestantes'));
+
+        $preguntasDeEncuesta=  collect();
+        foreach ($evaluacion->preguntaDeEncuesta as $p){
+            $preguntasDeEncuesta->push($p->tienePregunta);
+        }
+
+
+        return view('evaluacion/administrarEvaluacion', compact('evaluacion','preguntasRestantes','preguntasDeEncuesta'));
     }
 
     /**
